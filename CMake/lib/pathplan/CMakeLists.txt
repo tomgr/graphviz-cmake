@@ -1,0 +1,11 @@
+add_library(${LIB_PATHPLAN}
+    ${GRAPHVIZ_SRC_DIR}/lib/pathplan/cvt.c
+    ${GRAPHVIZ_SRC_DIR}/lib/pathplan/inpoly.c
+    ${GRAPHVIZ_SRC_DIR}/lib/pathplan/route.c
+    ${GRAPHVIZ_SRC_DIR}/lib/pathplan/shortest.c
+    ${GRAPHVIZ_SRC_DIR}/lib/pathplan/shortestpth.c
+    ${GRAPHVIZ_SRC_DIR}/lib/pathplan/solvers.c
+    ${GRAPHVIZ_SRC_DIR}/lib/pathplan/triang.c
+    ${GRAPHVIZ_SRC_DIR}/lib/pathplan/util.c
+    ${GRAPHVIZ_SRC_DIR}/lib/pathplan/visibility.c
+)

@@ -1,0 +1,18 @@
+add_library(${LIB_CDT}
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dttree.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtclose.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtdisc.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtextract.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtflatten.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dthash.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtlist.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtmethod.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtopen.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtrenew.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtrestore.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtsize.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtstat.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtstrhash.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtview.c
+    ${GRAPHVIZ_SRC_DIR}/lib/cdt/dtwalk.c
+)

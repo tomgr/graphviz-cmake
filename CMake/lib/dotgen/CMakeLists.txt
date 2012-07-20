@@ -1,0 +1,25 @@
+add_library(${LIB_DOTGEN}
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/acyclic.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/aspect.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/class1.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/class2.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/cluster.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/compound.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/conc.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/decomp.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/dotinit.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/dotsplines.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/fastgr.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/flat.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/mincross.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/position.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/rank.c
+    ${GRAPHVIZ_SRC_DIR}/lib/dotgen/sameport.c
+)
+
+target_link_libraries(${LIB_DOTGEN} 
+    ${LIB_COMMON}
+    ${LIB_GRAPH}
+    ${LIB_XDOT}
+    ${LIB_NEATOGEN}
+)

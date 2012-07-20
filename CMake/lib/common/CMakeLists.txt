@@ -1,0 +1,33 @@
+add_library(${LIB_COMMON}
+    ${GRAPHVIZ_SRC_DIR}/lib/common/args.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/arrows.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/colxlate.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/emit.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/fontmetrics.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/geom.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/globals.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/htmllex.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/htmlparse.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/htmltable.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/input.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/labels.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/memory.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/ns.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/output.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/pointset.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/postproc.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/psusershape.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/routespl.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/shapes.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/splines.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/timing.c
+    ${GRAPHVIZ_SRC_DIR}/lib/common/utils.c
+)
+
+target_link_libraries(${LIB_COMMON}
+    ${LIB_GVC}
+    ${LIB_GRAPH}
+    ${LIB_PATHPLAN}
+    ${LIB_XDOT}
+    z
+)

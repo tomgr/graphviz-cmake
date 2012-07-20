@@ -1,0 +1,30 @@
+add_library(${LIB_SFDPGEN}
+    #${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/layout_similarity.c
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/LinkedList.c
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/LinkedList.h
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/Multilevel.c
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/Multilevel.h
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/post_process.c
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/post_process.h
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/PriorityQueue.c
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/PriorityQueue.h
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/QuadTree.c
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/QuadTree.h
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/sfdp.h
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/sfdpinit.c
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/sfdpinternal.h
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/sparse_solve.c
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/sparse_solve.h
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/spring_electrical.c
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/spring_electrical.h
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/stress_model.c
+    ${GRAPHVIZ_SRC_DIR}/lib/sfdpgen/uniform_stress.c
+)
+
+target_link_libraries (${LIB_SFDPGEN}
+    ${LIB_COMMON}
+    ${LIB_GRAPH}
+    ${LIB_NEATOGEN}
+    ${LIB_PACK}
+    ${LIB_SPARSE}
+)
