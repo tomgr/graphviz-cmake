@@ -1,0 +1,1014 @@
+Grammar
+
+    0 $accept: file $end
+
+    1 $@1: /* empty */
+
+    2 file: graph_type T_id $@1 '{' stmt_list '}'
+    3     | error
+    4     | /* empty */
+
+    5 graph_type: T_graph
+    6           | T_strict T_graph
+    7           | T_digraph
+    8           | T_strict T_digraph
+
+    9 stmt_list: stmt_list1
+   10          | /* empty */
+
+   11 stmt_list1: stmt
+   12           | stmt_list1 stmt
+
+   13 stmt: stmt1
+   14     | stmt1 ';'
+
+   15 stmt1: node_stmt
+   16      | edge_stmt
+   17      | attr_stmt
+   18      | subg_stmt
+
+   19 $@2: /* empty */
+
+   20 node_stmt: node_id $@2 opt_attr_list
+
+   21 node_id: node_name node_port
+
+   22 node_name: T_id
+
+   23 $@3: /* empty */
+
+   24 $@4: /* empty */
+
+   25 edge_stmt: node_id $@3 edgeRHS $@4 opt_attr_list
+
+   26 $@5: /* empty */
+
+   27 $@6: /* empty */
+
+   28 edge_stmt: subg_stmt $@5 edgeRHS $@6 opt_attr_list
+
+   29 edgeRHS: T_edgeop node_id
+
+   30 $@7: /* empty */
+
+   31 edgeRHS: T_edgeop node_id $@7 edgeRHS
+   32        | T_edgeop subg_stmt
+
+   33 $@8: /* empty */
+
+   34 edgeRHS: T_edgeop subg_stmt $@8 edgeRHS
+
+   35 node_port: /* empty */
+   36          | port_location
+   37          | port_angle
+   38          | port_angle port_location
+   39          | port_location port_angle
+
+   40 port_location: ':' T_id
+   41              | ':' '(' T_id ',' T_id ')'
+
+   42 port_angle: '@' T_id
+
+   43 $@9: /* empty */
+
+   44 attr_stmt: attr_class $@9 attr_list
+   45          | attr_set
+
+   46 attr_class: T_graph
+   47           | T_node
+   48           | T_edge
+
+   49 opt_attr_list: rec_attr_list
+
+   50 rec_attr_list: rec_attr_list attr_list
+   51              | /* empty */
+
+   52 attr_list: '[' inside_attr_list ']'
+
+   53 inside_attr_list: attr_set optcomma inside_attr_list
+   54                 | /* empty */
+
+   55 attr_set: T_id '=' T_id
+
+   56 optcomma: /* empty */
+   57         | ','
+
+   58 subg_stmt: subg_hdr '{' stmt_list '}'
+
+   59 $@10: /* empty */
+
+   60 subg_stmt: '{' $@10 stmt_list '}'
+   61          | subg_hdr
+
+   62 subg_hdr: T_subgraph T_id
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 41
+')' (41) 41
+',' (44) 41 57
+':' (58) 40 41
+';' (59) 14
+'=' (61) 55
+'@' (64) 42
+'[' (91) 52
+']' (93) 52
+'{' (123) 2 58 60
+'}' (125) 2 58 60
+error (256) 3
+T_graph (258) 5 6 46
+T_digraph (259) 7 8
+T_strict (260) 6 8
+T_node (261) 47
+T_edge (262) 48
+T_edgeop (263) 29 31 32 34
+T_id (264) 2 22 40 41 42 55 62
+T_subgraph (265) 62
+
+
+Nonterminals, with rules where they appear
+
+$accept (22)
+    on left: 0
+file (23)
+    on left: 2 3 4, on right: 0
+$@1 (24)
+    on left: 1, on right: 2
+graph_type (25)
+    on left: 5 6 7 8, on right: 2
+stmt_list (26)
+    on left: 9 10, on right: 2 58 60
+stmt_list1 (27)
+    on left: 11 12, on right: 9 12
+stmt (28)
+    on left: 13 14, on right: 11 12
+stmt1 (29)
+    on left: 15 16 17 18, on right: 13 14
+node_stmt (30)
+    on left: 20, on right: 15
+$@2 (31)
+    on left: 19, on right: 20
+node_id (32)
+    on left: 21, on right: 20 25 29 31
+node_name (33)
+    on left: 22, on right: 21
+edge_stmt (34)
+    on left: 25 28, on right: 16
+$@3 (35)
+    on left: 23, on right: 25
+$@4 (36)
+    on left: 24, on right: 25
+$@5 (37)
+    on left: 26, on right: 28
+$@6 (38)
+    on left: 27, on right: 28
+edgeRHS (39)
+    on left: 29 31 32 34, on right: 25 28 31 34
+$@7 (40)
+    on left: 30, on right: 31
+$@8 (41)
+    on left: 33, on right: 34
+node_port (42)
+    on left: 35 36 37 38 39, on right: 21
+port_location (43)
+    on left: 40 41, on right: 36 38 39
+port_angle (44)
+    on left: 42, on right: 37 38 39
+attr_stmt (45)
+    on left: 44 45, on right: 17
+$@9 (46)
+    on left: 43, on right: 44
+attr_class (47)
+    on left: 46 47 48, on right: 44
+opt_attr_list (48)
+    on left: 49, on right: 20 25 28
+rec_attr_list (49)
+    on left: 50 51, on right: 49 50
+attr_list (50)
+    on left: 52, on right: 44 50
+inside_attr_list (51)
+    on left: 53 54, on right: 52 53
+attr_set (52)
+    on left: 55, on right: 45 53
+optcomma (53)
+    on left: 56 57, on right: 53
+subg_stmt (54)
+    on left: 58 60 61, on right: 18 28 32 34
+$@10 (55)
+    on left: 59, on right: 60
+subg_hdr (56)
+    on left: 62, on right: 58 61
+
+
+state 0
+
+    0 $accept: . file $end
+
+    error      shift, and go to state 1
+    T_graph    shift, and go to state 2
+    T_digraph  shift, and go to state 3
+    T_strict   shift, and go to state 4
+
+    $end  reduce using rule 4 (file)
+
+    file        go to state 5
+    graph_type  go to state 6
+
+
+state 1
+
+    3 file: error .
+
+    $default  reduce using rule 3 (file)
+
+
+state 2
+
+    5 graph_type: T_graph .
+
+    $default  reduce using rule 5 (graph_type)
+
+
+state 3
+
+    7 graph_type: T_digraph .
+
+    $default  reduce using rule 7 (graph_type)
+
+
+state 4
+
+    6 graph_type: T_strict . T_graph
+    8           | T_strict . T_digraph
+
+    T_graph    shift, and go to state 7
+    T_digraph  shift, and go to state 8
+
+
+state 5
+
+    0 $accept: file . $end
+
+    $end  shift, and go to state 9
+
+
+state 6
+
+    2 file: graph_type . T_id $@1 '{' stmt_list '}'
+
+    T_id  shift, and go to state 10
+
+
+state 7
+
+    6 graph_type: T_strict T_graph .
+
+    $default  reduce using rule 6 (graph_type)
+
+
+state 8
+
+    8 graph_type: T_strict T_digraph .
+
+    $default  reduce using rule 8 (graph_type)
+
+
+state 9
+
+    0 $accept: file $end .
+
+    $default  accept
+
+
+state 10
+
+    2 file: graph_type T_id . $@1 '{' stmt_list '}'
+
+    $default  reduce using rule 1 ($@1)
+
+    $@1  go to state 11
+
+
+state 11
+
+    2 file: graph_type T_id $@1 . '{' stmt_list '}'
+
+    '{'  shift, and go to state 12
+
+
+state 12
+
+    2 file: graph_type T_id $@1 '{' . stmt_list '}'
+
+    T_graph     shift, and go to state 13
+    T_node      shift, and go to state 14
+    T_edge      shift, and go to state 15
+    T_id        shift, and go to state 16
+    T_subgraph  shift, and go to state 17
+    '{'         shift, and go to state 18
+
+    $default  reduce using rule 10 (stmt_list)
+
+    stmt_list   go to state 19
+    stmt_list1  go to state 20
+    stmt        go to state 21
+    stmt1       go to state 22
+    node_stmt   go to state 23
+    node_id     go to state 24
+    node_name   go to state 25
+    edge_stmt   go to state 26
+    attr_stmt   go to state 27
+    attr_class  go to state 28
+    attr_set    go to state 29
+    subg_stmt   go to state 30
+    subg_hdr    go to state 31
+
+
+state 13
+
+   46 attr_class: T_graph .
+
+    $default  reduce using rule 46 (attr_class)
+
+
+state 14
+
+   47 attr_class: T_node .
+
+    $default  reduce using rule 47 (attr_class)
+
+
+state 15
+
+   48 attr_class: T_edge .
+
+    $default  reduce using rule 48 (attr_class)
+
+
+state 16
+
+   22 node_name: T_id .
+   55 attr_set: T_id . '=' T_id
+
+    '='  shift, and go to state 32
+
+    $default  reduce using rule 22 (node_name)
+
+
+state 17
+
+   62 subg_hdr: T_subgraph . T_id
+
+    T_id  shift, and go to state 33
+
+
+state 18
+
+   60 subg_stmt: '{' . $@10 stmt_list '}'
+
+    $default  reduce using rule 59 ($@10)
+
+    $@10  go to state 34
+
+
+state 19
+
+    2 file: graph_type T_id $@1 '{' stmt_list . '}'
+
+    '}'  shift, and go to state 35
+
+
+state 20
+
+    9 stmt_list: stmt_list1 .
+   12 stmt_list1: stmt_list1 . stmt
+
+    T_graph     shift, and go to state 13
+    T_node      shift, and go to state 14
+    T_edge      shift, and go to state 15
+    T_id        shift, and go to state 16
+    T_subgraph  shift, and go to state 17
+    '{'         shift, and go to state 18
+
+    $default  reduce using rule 9 (stmt_list)
+
+    stmt        go to state 36
+    stmt1       go to state 22
+    node_stmt   go to state 23
+    node_id     go to state 24
+    node_name   go to state 25
+    edge_stmt   go to state 26
+    attr_stmt   go to state 27
+    attr_class  go to state 28
+    attr_set    go to state 29
+    subg_stmt   go to state 30
+    subg_hdr    go to state 31
+
+
+state 21
+
+   11 stmt_list1: stmt .
+
+    $default  reduce using rule 11 (stmt_list1)
+
+
+state 22
+
+   13 stmt: stmt1 .
+   14     | stmt1 . ';'
+
+    ';'  shift, and go to state 37
+
+    $default  reduce using rule 13 (stmt)
+
+
+state 23
+
+   15 stmt1: node_stmt .
+
+    $default  reduce using rule 15 (stmt1)
+
+
+state 24
+
+   20 node_stmt: node_id . $@2 opt_attr_list
+   25 edge_stmt: node_id . $@3 edgeRHS $@4 opt_attr_list
+
+    T_edgeop  reduce using rule 23 ($@3)
+    $default  reduce using rule 19 ($@2)
+
+    $@2  go to state 38
+    $@3  go to state 39
+
+
+state 25
+
+   21 node_id: node_name . node_port
+
+    ':'  shift, and go to state 40
+    '@'  shift, and go to state 41
+
+    $default  reduce using rule 35 (node_port)
+
+    node_port      go to state 42
+    port_location  go to state 43
+    port_angle     go to state 44
+
+
+state 26
+
+   16 stmt1: edge_stmt .
+
+    $default  reduce using rule 16 (stmt1)
+
+
+state 27
+
+   17 stmt1: attr_stmt .
+
+    $default  reduce using rule 17 (stmt1)
+
+
+state 28
+
+   44 attr_stmt: attr_class . $@9 attr_list
+
+    $default  reduce using rule 43 ($@9)
+
+    $@9  go to state 45
+
+
+state 29
+
+   45 attr_stmt: attr_set .
+
+    $default  reduce using rule 45 (attr_stmt)
+
+
+state 30
+
+   18 stmt1: subg_stmt .
+   28 edge_stmt: subg_stmt . $@5 edgeRHS $@6 opt_attr_list
+
+    T_edgeop  reduce using rule 26 ($@5)
+    $default  reduce using rule 18 (stmt1)
+
+    $@5  go to state 46
+
+
+state 31
+
+   58 subg_stmt: subg_hdr . '{' stmt_list '}'
+   61          | subg_hdr .
+
+    '{'  shift, and go to state 47
+
+    $default  reduce using rule 61 (subg_stmt)
+
+
+state 32
+
+   55 attr_set: T_id '=' . T_id
+
+    T_id  shift, and go to state 48
+
+
+state 33
+
+   62 subg_hdr: T_subgraph T_id .
+
+    $default  reduce using rule 62 (subg_hdr)
+
+
+state 34
+
+   60 subg_stmt: '{' $@10 . stmt_list '}'
+
+    T_graph     shift, and go to state 13
+    T_node      shift, and go to state 14
+    T_edge      shift, and go to state 15
+    T_id        shift, and go to state 16
+    T_subgraph  shift, and go to state 17
+    '{'         shift, and go to state 18
+
+    $default  reduce using rule 10 (stmt_list)
+
+    stmt_list   go to state 49
+    stmt_list1  go to state 20
+    stmt        go to state 21
+    stmt1       go to state 22
+    node_stmt   go to state 23
+    node_id     go to state 24
+    node_name   go to state 25
+    edge_stmt   go to state 26
+    attr_stmt   go to state 27
+    attr_class  go to state 28
+    attr_set    go to state 29
+    subg_stmt   go to state 30
+    subg_hdr    go to state 31
+
+
+state 35
+
+    2 file: graph_type T_id $@1 '{' stmt_list '}' .
+
+    $default  reduce using rule 2 (file)
+
+
+state 36
+
+   12 stmt_list1: stmt_list1 stmt .
+
+    $default  reduce using rule 12 (stmt_list1)
+
+
+state 37
+
+   14 stmt: stmt1 ';' .
+
+    $default  reduce using rule 14 (stmt)
+
+
+state 38
+
+   20 node_stmt: node_id $@2 . opt_attr_list
+
+    $default  reduce using rule 51 (rec_attr_list)
+
+    opt_attr_list  go to state 50
+    rec_attr_list  go to state 51
+
+
+state 39
+
+   25 edge_stmt: node_id $@3 . edgeRHS $@4 opt_attr_list
+
+    T_edgeop  shift, and go to state 52
+
+    edgeRHS  go to state 53
+
+
+state 40
+
+   40 port_location: ':' . T_id
+   41              | ':' . '(' T_id ',' T_id ')'
+
+    T_id  shift, and go to state 54
+    '('   shift, and go to state 55
+
+
+state 41
+
+   42 port_angle: '@' . T_id
+
+    T_id  shift, and go to state 56
+
+
+state 42
+
+   21 node_id: node_name node_port .
+
+    $default  reduce using rule 21 (node_id)
+
+
+state 43
+
+   36 node_port: port_location .
+   39          | port_location . port_angle
+
+    '@'  shift, and go to state 41
+
+    $default  reduce using rule 36 (node_port)
+
+    port_angle  go to state 57
+
+
+state 44
+
+   37 node_port: port_angle .
+   38          | port_angle . port_location
+
+    ':'  shift, and go to state 40
+
+    $default  reduce using rule 37 (node_port)
+
+    port_location  go to state 58
+
+
+state 45
+
+   44 attr_stmt: attr_class $@9 . attr_list
+
+    '['  shift, and go to state 59
+
+    attr_list  go to state 60
+
+
+state 46
+
+   28 edge_stmt: subg_stmt $@5 . edgeRHS $@6 opt_attr_list
+
+    T_edgeop  shift, and go to state 52
+
+    edgeRHS  go to state 61
+
+
+state 47
+
+   58 subg_stmt: subg_hdr '{' . stmt_list '}'
+
+    T_graph     shift, and go to state 13
+    T_node      shift, and go to state 14
+    T_edge      shift, and go to state 15
+    T_id        shift, and go to state 16
+    T_subgraph  shift, and go to state 17
+    '{'         shift, and go to state 18
+
+    $default  reduce using rule 10 (stmt_list)
+
+    stmt_list   go to state 62
+    stmt_list1  go to state 20
+    stmt        go to state 21
+    stmt1       go to state 22
+    node_stmt   go to state 23
+    node_id     go to state 24
+    node_name   go to state 25
+    edge_stmt   go to state 26
+    attr_stmt   go to state 27
+    attr_class  go to state 28
+    attr_set    go to state 29
+    subg_stmt   go to state 30
+    subg_hdr    go to state 31
+
+
+state 48
+
+   55 attr_set: T_id '=' T_id .
+
+    $default  reduce using rule 55 (attr_set)
+
+
+state 49
+
+   60 subg_stmt: '{' $@10 stmt_list . '}'
+
+    '}'  shift, and go to state 63
+
+
+state 50
+
+   20 node_stmt: node_id $@2 opt_attr_list .
+
+    $default  reduce using rule 20 (node_stmt)
+
+
+state 51
+
+   49 opt_attr_list: rec_attr_list .
+   50 rec_attr_list: rec_attr_list . attr_list
+
+    '['  shift, and go to state 59
+
+    $default  reduce using rule 49 (opt_attr_list)
+
+    attr_list  go to state 64
+
+
+state 52
+
+   29 edgeRHS: T_edgeop . node_id
+   31        | T_edgeop . node_id $@7 edgeRHS
+   32        | T_edgeop . subg_stmt
+   34        | T_edgeop . subg_stmt $@8 edgeRHS
+
+    T_id        shift, and go to state 65
+    T_subgraph  shift, and go to state 17
+    '{'         shift, and go to state 18
+
+    node_id    go to state 66
+    node_name  go to state 25
+    subg_stmt  go to state 67
+    subg_hdr   go to state 31
+
+
+state 53
+
+   25 edge_stmt: node_id $@3 edgeRHS . $@4 opt_attr_list
+
+    $default  reduce using rule 24 ($@4)
+
+    $@4  go to state 68
+
+
+state 54
+
+   40 port_location: ':' T_id .
+
+    $default  reduce using rule 40 (port_location)
+
+
+state 55
+
+   41 port_location: ':' '(' . T_id ',' T_id ')'
+
+    T_id  shift, and go to state 69
+
+
+state 56
+
+   42 port_angle: '@' T_id .
+
+    $default  reduce using rule 42 (port_angle)
+
+
+state 57
+
+   39 node_port: port_location port_angle .
+
+    $default  reduce using rule 39 (node_port)
+
+
+state 58
+
+   38 node_port: port_angle port_location .
+
+    $default  reduce using rule 38 (node_port)
+
+
+state 59
+
+   52 attr_list: '[' . inside_attr_list ']'
+
+    T_id  shift, and go to state 70
+
+    $default  reduce using rule 54 (inside_attr_list)
+
+    inside_attr_list  go to state 71
+    attr_set          go to state 72
+
+
+state 60
+
+   44 attr_stmt: attr_class $@9 attr_list .
+
+    $default  reduce using rule 44 (attr_stmt)
+
+
+state 61
+
+   28 edge_stmt: subg_stmt $@5 edgeRHS . $@6 opt_attr_list
+
+    $default  reduce using rule 27 ($@6)
+
+    $@6  go to state 73
+
+
+state 62
+
+   58 subg_stmt: subg_hdr '{' stmt_list . '}'
+
+    '}'  shift, and go to state 74
+
+
+state 63
+
+   60 subg_stmt: '{' $@10 stmt_list '}' .
+
+    $default  reduce using rule 60 (subg_stmt)
+
+
+state 64
+
+   50 rec_attr_list: rec_attr_list attr_list .
+
+    $default  reduce using rule 50 (rec_attr_list)
+
+
+state 65
+
+   22 node_name: T_id .
+
+    $default  reduce using rule 22 (node_name)
+
+
+state 66
+
+   29 edgeRHS: T_edgeop node_id .
+   31        | T_edgeop node_id . $@7 edgeRHS
+
+    T_edgeop  reduce using rule 30 ($@7)
+    $default  reduce using rule 29 (edgeRHS)
+
+    $@7  go to state 75
+
+
+state 67
+
+   32 edgeRHS: T_edgeop subg_stmt .
+   34        | T_edgeop subg_stmt . $@8 edgeRHS
+
+    T_edgeop  reduce using rule 33 ($@8)
+    $default  reduce using rule 32 (edgeRHS)
+
+    $@8  go to state 76
+
+
+state 68
+
+   25 edge_stmt: node_id $@3 edgeRHS $@4 . opt_attr_list
+
+    $default  reduce using rule 51 (rec_attr_list)
+
+    opt_attr_list  go to state 77
+    rec_attr_list  go to state 51
+
+
+state 69
+
+   41 port_location: ':' '(' T_id . ',' T_id ')'
+
+    ','  shift, and go to state 78
+
+
+state 70
+
+   55 attr_set: T_id . '=' T_id
+
+    '='  shift, and go to state 32
+
+
+state 71
+
+   52 attr_list: '[' inside_attr_list . ']'
+
+    ']'  shift, and go to state 79
+
+
+state 72
+
+   53 inside_attr_list: attr_set . optcomma inside_attr_list
+
+    ','  shift, and go to state 80
+
+    $default  reduce using rule 56 (optcomma)
+
+    optcomma  go to state 81
+
+
+state 73
+
+   28 edge_stmt: subg_stmt $@5 edgeRHS $@6 . opt_attr_list
+
+    $default  reduce using rule 51 (rec_attr_list)
+
+    opt_attr_list  go to state 82
+    rec_attr_list  go to state 51
+
+
+state 74
+
+   58 subg_stmt: subg_hdr '{' stmt_list '}' .
+
+    $default  reduce using rule 58 (subg_stmt)
+
+
+state 75
+
+   31 edgeRHS: T_edgeop node_id $@7 . edgeRHS
+
+    T_edgeop  shift, and go to state 52
+
+    edgeRHS  go to state 83
+
+
+state 76
+
+   34 edgeRHS: T_edgeop subg_stmt $@8 . edgeRHS
+
+    T_edgeop  shift, and go to state 52
+
+    edgeRHS  go to state 84
+
+
+state 77
+
+   25 edge_stmt: node_id $@3 edgeRHS $@4 opt_attr_list .
+
+    $default  reduce using rule 25 (edge_stmt)
+
+
+state 78
+
+   41 port_location: ':' '(' T_id ',' . T_id ')'
+
+    T_id  shift, and go to state 85
+
+
+state 79
+
+   52 attr_list: '[' inside_attr_list ']' .
+
+    $default  reduce using rule 52 (attr_list)
+
+
+state 80
+
+   57 optcomma: ',' .
+
+    $default  reduce using rule 57 (optcomma)
+
+
+state 81
+
+   53 inside_attr_list: attr_set optcomma . inside_attr_list
+
+    T_id  shift, and go to state 70
+
+    $default  reduce using rule 54 (inside_attr_list)
+
+    inside_attr_list  go to state 86
+    attr_set          go to state 72
+
+
+state 82
+
+   28 edge_stmt: subg_stmt $@5 edgeRHS $@6 opt_attr_list .
+
+    $default  reduce using rule 28 (edge_stmt)
+
+
+state 83
+
+   31 edgeRHS: T_edgeop node_id $@7 edgeRHS .
+
+    $default  reduce using rule 31 (edgeRHS)
+
+
+state 84
+
+   34 edgeRHS: T_edgeop subg_stmt $@8 edgeRHS .
+
+    $default  reduce using rule 34 (edgeRHS)
+
+
+state 85
+
+   41 port_location: ':' '(' T_id ',' T_id . ')'
+
+    ')'  shift, and go to state 87
+
+
+state 86
+
+   53 inside_attr_list: attr_set optcomma inside_attr_list .
+
+    $default  reduce using rule 53 (inside_attr_list)
+
+
+state 87
+
+   41 port_location: ':' '(' T_id ',' T_id ')' .
+
+    $default  reduce using rule 41 (port_location)
