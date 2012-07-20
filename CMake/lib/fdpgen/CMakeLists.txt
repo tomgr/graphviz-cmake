@@ -1,4 +1,4 @@
-add_library(${LIB_FDPGEN} STATIC
+add_library(${LIB_FDPGEN}
     ${GRAPHVIZ_SRC_DIR}/lib/fdpgen/clusteredges.c
     ${GRAPHVIZ_SRC_DIR}/lib/fdpgen/comp.c
     ${GRAPHVIZ_SRC_DIR}/lib/fdpgen/dbg.c
