@@ -4,10 +4,17 @@
 
 cmake_minimum_required (VERSION 2.8)
 
-project(GraphViz)
+project(GraphViz C CXX)
 
-set(GRAPHVIZ_CMAKE_DIR "${CMAKE_SOURCE_DIR}/CMake")
-set(GRAPHVIZ_SRC_DIR "${CMAKE_SOURCE_DIR}")
+set(CMAKE_C_FLAGS_DEBUG "-g -gdwarf-2")
+set(CMAKE_C_FLAGS_PROFILE "-O1 -g")
+set(CMAKE_C_FLAGS_RELEASE "-O4")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -gdwarf-2")
+set(CMAKE_CXX_FLAGS_PROFILE "-O2 -g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+
+set(GRAPHVIZ_CMAKE_DIR "${GraphViz_SOURCE_DIR}/CMake")
+set(GRAPHVIZ_SRC_DIR "${GraphViz_SOURCE_DIR}")
 set(LIB_GRAPHVIZ "graphviz")
 set(GRAPHVIZ_LIB_PREFIX "graphviz_lib_")
 set(GRAPHVIZ_PLUGIN_PREFIX "graphviz_plugin_")
