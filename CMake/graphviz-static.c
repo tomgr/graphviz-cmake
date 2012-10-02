@@ -15,8 +15,8 @@
 #include "config.h"
 #endif
 
-#include "graphviz/gvplugin.h"
-#include "graphviz/gvc.h"
+#include "gvplugin.h"
+#include "gvc.h"
  
 #if defined(GVDLL) && !defined(ENABLE_LTDL)
 #define extern  __declspec(dllimport)
