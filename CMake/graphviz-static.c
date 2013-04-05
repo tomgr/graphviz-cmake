@@ -19,7 +19,7 @@
 #include "gvc.h"
  
 #if defined(GVDLL) && !defined(ENABLE_LTDL)
-#define extern  __declspec(dllimport)
+#define extern
 #endif
 
 extern gvplugin_library_t gvplugin_dot_layout_LTX_library;
